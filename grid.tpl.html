@@ -1,0 +1,84 @@
+<div keystroke-nav tool-tip class="grid-wrap"
+	custom-context-menu
+	ng-style="{'font-size': fontSize+'px'}"
+ 	grid-header="header"
+ 	grid-body="body"
+	>
+	<!-- Header placeholder -->
+	<div class="row-col-header" ng-show="isRendered">
+		<ul class="grid main-wrap row-header-width" ng-show="isRendered">
+			<li class="grid-row fixed-row-col-header">
+				<div class="grid-header">
+					<span class="blank"></span>
+                    <span class="multi-select">
+						<input type="checkbox"
+                               id="group-select-all"
+                               class="toggle-checkbox"
+                               name="group-select-all"
+                               type="checkbox"
+                               ng-model="isCheckAll"
+                               value="all"
+                               indeterminate-state
+                               checkboxes-selector=".grid.row-header-fixed"
+                               checkboxes="body.modules"
+                                >
+						<label  for="group-select-all" class="visually-hidden"  >{{isCheckAll}}</label>
+					</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+
+	<div class="column-header" m-col-header>
+		<ul class="grid column-header-inner" ng-init="modules=header.modules" input-editable callback="editAssemblyName" ng-show="isRendered">
+			<li class="grid-header col-main header-border">
+				<div class="grid-header col-header-fix">
+					<span class="blank row-header-width" ></span>
+				</div>
+			</li>
+		</ul>
+		<!--<div ng-if="isOwnedModule" class="add-assembly" ng-click="addNewAssembly(true)">+</div> -->
+	</div>
+	<div class="row-header" ng-show="isRendered" m-row-header>
+		<ul class="grid">
+			<li class="grid-row blank-head">
+				<div class="grid-header col-header-fix row-header-width" >
+					<span style="display: inline-block;"></span>
+					<!-- <ul class="grid last-grid">
+						<li class="grid-row blank" > -->
+							<!-- ng-repeat="mod in body">-->
+							
+						<!-- </li>
+					</ul> -->
+				</div>
+			</li>
+		</ul>
+		<!-- row-reorder will reorder parent and child within -->
+		<ul class="grid row-header-fixed list-reorder" has-permission="CU" is-listview="true" ></ul>
+		<!-- <ul class="grid row-header-fixed list-reorderCell"></ul> -->
+	</div>
+<!-- todo: update names of directives m-row-header and m-main-grid -->
+	<div class="main-table" ng-class="{'main-table-initial' : header.modules.length === 0, 'no-data': !(body && body.length)}" m-main-grid m-virtual-scroll-dir data-holder="ul.sortable-body-drop" data-rowheader="ul.row-header-fixed">
+		<div class="wrapper">
+			<div class="inner-main-table1">
+				<ul class="grid main-table-header sortable-header-drop pinnable-area" ng-show="isRendered">
+					<li class="grid-header col-main">
+						<div class="grid-header" >
+							<span style="display: inline-block;"></span>
+							<ul class="grid">
+								<li class="grid-row">
+									<div class="grid-header"></div>
+									<div class="grid-header"></div>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+				<ul class="grid main-table-body sortable-body-drop" allow-number-with-no-special-char is-event-delegation="true" restrict-decimal-place allowed-chars="{{allowedChar}}" module-custom-autocomplete ></ul>
+				
+				<div class="drop-area drop-area-module ui-droppable" ></div>
+			</div>
+		</div>
+	</div>
+</div>
